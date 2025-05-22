@@ -22,7 +22,6 @@ contract Inspirational_Quotes {
     }
 
     function postNote(string memory _text) public {
-        // Only add to quoters if it's their first note
         if (bytes(notes[msg.sender].text).length == 0) {
             quoters.push(msg.sender);
         }
@@ -38,7 +37,6 @@ contract Inspirational_Quotes {
         delete notes[msg.sender];
     }
 
-    // Optional: only the contract owner can see how many people posted
     function getTotalQuoters() public view onlyOwner returns (uint) {
         return quoters.length;
     }
