@@ -1,16 +1,13 @@
 const hre = require("hardhat");
 
 async function main() {
-  // Get the contract factory
   const CalculatorFactory = await hre.ethers.getContractFactory("Calculator");
 
-  // Deploy the contract
   const calculator = await CalculatorFactory.deploy();
-  await calculator.waitForDeployment(); // ✅ use waitForDeployment() instead of deployed()
+  await calculator.waitForDeployment();
 
   console.log("✅ Calculator deployed to:", await calculator.getAddress());
 
-  // Interact with the contract
   await (await calculator.add(10)).wait();
   console.log("🧮 Added 10");
 
@@ -21,7 +18,7 @@ async function main() {
   console.log("➖ Subtracted 5");
 
   const result = await calculator.get();
-  console.log("📊 Final result:", result.toString()); // Expected: 15
+  console.log("📊 Final result:", result.toString());
 }
 
 main().catch((error) => {
